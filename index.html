@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>淨行初履｜Jingxing-Chulu</title>
 <meta name="description" content="用〈淨行品〉過每一天。聚葉掃塵、法鼓山園區素描抄願、拉槌叩鐘、數息調心，在生活細行裡學習轉念、善用其心，讓自己更好。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1690,7 +1693,7 @@
 
     <div style="padding:24px 0; margin-top:16px; text-align:center;">
       <a class="zen-btn seal" href="https://tallyc.github.io/Jingxing-Pin/" target="_blank" rel="noopener noreferrer" style="display:inline-block; text-decoration:none; max-width:260px;">前往《來生，出家簿》 →</a>
-      <p class="colophon-note">淨行初履（Jingxing-Chulu）<span id="appVersionTag">V-1.1</span>（2026.11.24）｜<button type="button" class="text-link" id="checkUpdateBtn" style="font-size:inherit; padding:0 2px;">檢查更新</button><br>AI 協助撰寫與繪製，請自行判斷；不主張著作權，歡迎廣傳。</p>
+      <p class="colophon-note">淨行初履（Jingxing-Chulu）<span id="appVersionTag">V-1.2</span>（2026.11.24）｜<button type="button" class="text-link" id="checkUpdateBtn" style="font-size:inherit; padding:0 2px;">檢查更新</button><br>AI 協助撰寫與繪製，請自行判斷；不主張著作權，歡迎廣傳。</p>
       <p class="colophon-note" id="updateStatusMsg" style="margin-top:6px; color:var(--seal); display:none;"></p>
     </div>
   </section>
@@ -3274,39 +3277,64 @@
   refreshStamps();
   renderLot(Math.floor(Math.random() * LOTS.length));
 
+  const CURRENT_VER = '1.2';
+  const parseVer = (str) => str.split('.').map(n => parseInt(n, 10) || 0);
+  const isNewer = (remote, local) => {
+    const r = parseVer(remote), l = parseVer(local);
+    for (let i = 0; i < Math.max(r.length, l.length); i++) {
+      if ((r[i] || 0) > (l[i] || 0)) return true;
+      if ((r[i] || 0) < (l[i] || 0)) return false;
+    }
+    return false;
+  };
+  async function fetchRemoteVersion() {
+    const targetUrl = (location.hostname === 'tallyc.github.io')
+      ? location.pathname + '?t=' + Date.now()
+      : 'https://tallyc.github.io/Jingxing-Chulu/index.html?t=' + Date.now();
+    const res = await fetch(targetUrl, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    const m = text.match(/淨行初履（Jingxing-Chulu）[^<]*(?:<[^>]+>)*V-([0-9]+\.[0-9]+)/);
+    return m ? m[1] : null;
+  }
+  function forceReloadVersion(ver) {
+    const base = location.origin + location.pathname;
+    location.replace(base + '?v=' + ver + '&t=' + Date.now());
+  }
+  async function autoCheckUpdate() {
+    if (location.protocol !== 'https:' && location.protocol !== 'http:') return;
+    try {
+      const remoteVer = await fetchRemoteVersion();
+      if (remoteVer && isNewer(remoteVer, CURRENT_VER)) {
+        if (sessionStorage.getItem('jx_auto_updated_to') === remoteVer) return;
+        sessionStorage.setItem('jx_auto_updated_to', remoteVer);
+        if (typeof showToast === 'function') showToast('發現新版 V-' + remoteVer + '，正在更新…');
+        setTimeout(() => forceReloadVersion(remoteVer), 650);
+      }
+    } catch (e) {}
+  }
+  let lastAutoCheckAt = Date.now();
+  setTimeout(autoCheckUpdate, 1200);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && Date.now() - lastAutoCheckAt > 300000) {
+      lastAutoCheckAt = Date.now();
+      autoCheckUpdate();
+    }
+  });
+
   const checkUpdateBtn = document.getElementById('checkUpdateBtn');
   const updateStatusMsg = document.getElementById('updateStatusMsg');
   if (checkUpdateBtn && updateStatusMsg) {
-    const CURRENT_VER = '1.1';
-    const parseVer = (str) => str.split('.').map(n => parseInt(n, 10) || 0);
-    const isNewer = (remote, local) => {
-      const r = parseVer(remote), l = parseVer(local);
-      for (let i = 0; i < Math.max(r.length, l.length); i++) {
-        if ((r[i] || 0) > (l[i] || 0)) return true;
-        if ((r[i] || 0) < (l[i] || 0)) return false;
-      }
-      return false;
-    };
     checkUpdateBtn.addEventListener('click', async () => {
       updateStatusMsg.style.display = 'block';
       updateStatusMsg.textContent = '正在比對線上最新版本…';
       try {
-        const targetUrl = (location.hostname === 'tallyc.github.io')
-          ? location.pathname + '?t=' + Date.now()
-          : 'https://tallyc.github.io/Jingxing-Chulu/index.html?t=' + Date.now();
-        const res = await fetch(targetUrl, { cache: 'no-store' });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const text = await res.text();
-        const m = text.match(/淨行初履（Jingxing-Chulu）[^<]*(?:<[^>]+>)*V-([0-9]+\.[0-9]+)/);
-        const remoteVer = m ? m[1] : null;
+        const remoteVer = await fetchRemoteVersion();
         if (!remoteVer) {
           updateStatusMsg.textContent = '已連線，但未能讀取版本號（目前為 V-' + CURRENT_VER + '）。';
         } else if (isNewer(remoteVer, CURRENT_VER)) {
           updateStatusMsg.innerHTML = '發現新版 V-' + remoteVer + '！<button type="button" class="text-link" id="reloadNewVerBtn" style="color:var(--seal); font-weight:600; margin-left:6px;">點此立即更新 →</button>';
-          document.getElementById('reloadNewVerBtn').addEventListener('click', () => {
-            const base = location.origin + location.pathname;
-            location.href = base + '?v=' + remoteVer + '&t=' + Date.now();
-          });
+          document.getElementById('reloadNewVerBtn').addEventListener('click', () => forceReloadVersion(remoteVer));
         } else {
           updateStatusMsg.textContent = '目前已是最新版（V-' + CURRENT_VER + '）。';
         }
