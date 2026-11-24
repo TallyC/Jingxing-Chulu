@@ -1016,6 +1016,30 @@
     font-size: 12.5px !important;
     letter-spacing: 0.16em !important;
   }
+  .intro-overlay {
+    padding: 0 !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+  }
+  .intro-scroll {
+    max-width: 680px !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    padding: 16px 22px calc(28px + env(safe-area-inset-bottom)) !important;
+    border-radius: 0 !important;
+  }
+  .intro-top {
+    padding-top: 0 !important;
+  }
+  .intro-mark {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.24em !important;
+    color: var(--ink) !important;
+    gap: 10px !important;
+    line-height: 1.4 !important;
+    min-height: 24px;
+  }
   #comicOverlay {
     position: fixed;
     inset: 0;
@@ -1251,7 +1275,7 @@
 </div>
 
 <header class="topbar">
-  <button type="button" class="brand-btn" id="homeBrandBtn">
+  <button type="button" class="brand-btn" id="homeBrandBtn" title="回到序幕頁" aria-label="淨行初履｜回到序幕頁">
     <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCACAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9oKKKK8c7AooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKivr6HTbOS4uJUhghUs8jnCqB3NAEtYvijx3pnhkTRXOoWVrNDEk0xlmC/ZYncIsjD3YgKvV24UGvIv2tf2hfF/w+0Saz8HeHr26nubQSpqUMQuJkRgdzxREeXGU4/eXRCbiAsU3Ir80/ix4F+N37Rst/qd//wAJZF4XimjWOFzJayPeKSqXZMmyZpThd95cRq3zhbeGJCNtKNwP1n8PfHjRdVv7mKW/giMV0bCOF12zNKufM3dvl2tv28IVcHlSB0f/AAl1vf65YWFjcRXL3CPczPEPMSOJPl5IOFLOQoz/AHWHUV+Zn7K/woj+GWqa1d+O7+LRPEF3LbLKq6i0txo6qmLKxSHBTzZTseOEb3wse8Y3F/t79mz4X6h4Bju77Uri5udR8YTreXBmZUXQ9MiXZZ2KAYyxLM7v1eSWVj1UBNWA9uBz05oplvGUQlwgkYkttzg/n7Yp9IAooooAKKKKACiimT3EdrbyTSyJFDCpaSR2CpGBySzHgAepoAfR0H0rhtb/AGhfDmnW4mtLuLU7XEbvewzJHp8SOfvG6ciHpk4DEnsKwF+OVj430WznsLnTta0vUQyy6hbXHl6RbASyAbpnw0rkR7fKQZJJ4wQaAOz8SfEePRtV+w29ncXMojSV7qRTFYwhmwFMx4aQgMRHGGcgZ4yKzdM8V2h0ZNT1D7ZPcQCS8tVuLZBfTQliCUtxgxx42KC2DgZYg5NfOnxm/wCCgPhn4fePbTRdH0zUfH/xMeAwaR4c0iMPcoCygym2BY2sbAoxlmxJsAxEQDWf8DPH+pab43gg+Kev6cPiDf6TLPdaDoEnnXGnRtMxja4uhIy24UEorSt9/hCoAQOwH1FpPjiDUIzMq2en6VJai+vLsXIzDK5+67YCowXB3E55AAA5rmNci8La5DfWVv4aiu9ThtZp9PtHjVbzU2RWUuoc5U7m2iWUhv3m7gEE+faDbax8Q9UsrCwh0e1m8KXDRzx6bIV0LRI5W3+cVkGLi6EYYB5ASpdmMalgw9g8Itpej/aIdGnW8aG3Cy6pdXIkeY+aSsRZhyuS+DnA7ButAHlnwS/YM0j4WeIF8RFIJdZikE+n6W87yWOitIMSybiS087FpHedh5shO0vt5r2vR9Gc3Ft+9adbVt11Nc2+2a8k2nD8AKpBwcAYHHHTGnbZvL15Y2mRUfy5AybVcqP4cjkZP3s9uKugYAA6CkAUUUUAFKiNK6qoLMxwAO5pK83/AGvPCuveNf2avGemeG7myttWutKnWM3TTpHIuwlkElvJHNE5AO2RGyrY4IyCAfO/jj/gvb+z58NPjBrngvXrvx1pmoeHtQm028uZPDE5tllibYxGD5uwnOCYxkc4wQTk+KP+Dh/9m/Q7ATWF94512U9IbTw5JCR16tO8ajt37ivw68e+CpNN1ie6Nze6o87EySSyySzM4J3b3cZLZ657/lXITXyRTS+UpVRg7fQZ5FbqkiOZn6mftF/8HMPjPU3ntfhf8OdH8P2+/EepeI7g6jcsvr9niKRIfq7/AI18r3//AAVJ+M3jubV7nxnrqeMp9Y2otprYkl0qxXJYLFp8Tx25Gf8Anqsn3cYNfPWjSpdWJ4Hn8si9cep9+KuWVvHcRSXDFSGO5Vx2HTj2IAq1BIV2en/Gb9o7xh8f10vUPE/jDxL4l1eO5+0m01GONNE0sqx2xW9oh8sghUyQiKFJQBuWOF4s+O/xR+KuoQ/25438R3ws4vItYYbj7Hb2MO3HlW8MIVIF2gZEQUtxnNZGiXzR7ZW2lGbLZOdy4HB75zjP8q7z4TeEdB8R+NrOHxLqWraRpFxLmW40nTf7QvHBIKxQQblDyNnAydo6ndjBNEAfAfxf40+Ettqll4K1TUdLvvGUQ02+bSUK6lfRbt5hjmQGba7YLCMhmKjJIAr73/Zk/wCCb/j/AEbw54fufibqCfD7wVYWRlbwzoyxHXtZjZV815NmPKkkL4muJnLqp2fKoFdT/wAE+vhfqHhL4z6bJ4H8BXPwp8OTp9jl1DxBZ/2v4t1iF1BMks5Kw6chIJVIwj5X7svb9AbDwNGfF1vPdx3WsSJZeX9qmINup8zd5gX7vmEgfd5GMjGc1jKZaRh/ArQ9MbwXL4e07QbTQNC0iC3hs9HYCUEEbzPLuUly5AIMmWbaXIIZWPdaH4Nt9HkucKrW91ybd1Dorbslsnrnjrnp1Pa3pehJprtI0jXE7EkyOoBGcZwBxyRnPJ98YFXQCM5Ofw6VmMUnNFFFABRRRQAUAkHIJBHQjqKKKAPy5/4K2/8ABJnxT4r8T+IfiX8N7OLXbO/WS+1fQIAIbuCTGZJYF6TBvmdlXa4IOA2TX5Fa/wDDedtWlijjljuEyWWRGVs9xtxlSM9Dz64r+ruvBf2m/wDgm78Kf2or7VNZ1nw1Z2njDUbYwDX7bzEuUbaFV3VXVJdoA4cc4AJ4rSNS2jJaP5trLQL/AEm6MMlrOjnGMocE9sHpk9q6HRfB2ragjSC2RACC25dvUDCn8scV+ovjf/g398a2FzctofijwprVvCm60jufOs2chvlQqVZVwOdwYjIPTgV23wM/4INXdxZxS/Ejxda2zeVn7HoEQmeOTces0qhDxg5VOpx0GTp7RC5Wfmp8OP2a9V8aa7BplpsmubkmSMuzJDCMAMWYAkDPyjgli6qASQD+uH/BPb/gnh/woT4dwf8AEr0228STo0d9rzaS8VzchjykT3LvIkQUbCIoot+cn1r6U+Av7HHw2/Zqs0Xwj4WsLK8EaxyahPm5vZ9ucFpXyQckn5do6ccDHp3espTbKSM/TPDVrpdvBEkaCO2jaKKNVCxopbOAvbsPpV9VCgAAADgADGKWioGFFFFABiiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" alt="" class="brand-logo-sm">
     <span>淨行初履</span>
   </button>
@@ -1309,7 +1333,7 @@
 
     <div class="stamp-strip">
       <span>行腳印譜</span>
-      <span style="display:inline-flex;align-items:center;gap:14px;"><span id="stampCountText">隨緣入徑</span><button type="button" class="intro-reopen" id="reopenIntroBtn">初履序</button></span>
+      <span id="stampCountText">隨緣入徑</span>
     </div>
 
     <div class="grand-strip" id="unlockBanner">
@@ -1668,7 +1692,8 @@
 
     <div style="padding:24px 0; margin-top:16px; text-align:center;">
       <a class="zen-btn seal" href="https://tallyc.github.io/Jingxing-Pin/" target="_blank" rel="noopener noreferrer" style="display:inline-block; text-decoration:none; max-width:260px;">前往《來生，出家簿》 →</a>
-      <p class="colophon-note">淨行初履（Jingxing-Chulu）V-1.0｜AI 協助撰寫與繪製，請自行判斷；不主張著作權，歡迎廣傳。</p>
+      <p class="colophon-note">淨行初履（Jingxing-Chulu）<span id="appVersionTag">V-1.1</span>（2026.11.24）｜<button type="button" class="text-link" id="checkUpdateBtn" style="font-size:inherit; padding:0 2px;">檢查更新</button><br>AI 協助撰寫與繪製，請自行判斷；不主張著作權，歡迎廣傳。</p>
+      <p class="colophon-note" id="updateStatusMsg" style="margin-top:6px; color:var(--seal); display:none;"></p>
     </div>
   </section>
 
@@ -2932,7 +2957,7 @@
   document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => switchView(b.dataset.open)));
   document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => switchView(b.dataset.go)));
   document.querySelectorAll('.dock-tab').forEach(b => b.addEventListener('click', () => switchView(b.dataset.tab)));
-  document.getElementById('homeBrandBtn').addEventListener('click', () => switchView('ordinary'));
+  document.getElementById('homeBrandBtn').addEventListener('click', () => openIntro());
   document.getElementById('soundBtn').addEventListener('click', () => {
     rt.soundOn = !rt.soundOn;
     const sb = document.getElementById('soundBtn'); sb.textContent = rt.soundOn ? '磬 開' : '磬 靜'; sb.classList.toggle('muted', !rt.soundOn);
@@ -3084,7 +3109,7 @@
     comicOverlay.classList.remove('open');
     closeIntro();
   });
-  document.getElementById('reopenIntroBtn').addEventListener('click', openIntro);
+  
   openIntro();
 
 
@@ -3250,6 +3275,48 @@
 
   refreshStamps();
   renderLot(Math.floor(Math.random() * LOTS.length));
+
+  const checkUpdateBtn = document.getElementById('checkUpdateBtn');
+  const updateStatusMsg = document.getElementById('updateStatusMsg');
+  if (checkUpdateBtn && updateStatusMsg) {
+    const CURRENT_VER = '1.1';
+    const parseVer = (str) => str.split('.').map(n => parseInt(n, 10) || 0);
+    const isNewer = (remote, local) => {
+      const r = parseVer(remote), l = parseVer(local);
+      for (let i = 0; i < Math.max(r.length, l.length); i++) {
+        if ((r[i] || 0) > (l[i] || 0)) return true;
+        if ((r[i] || 0) < (l[i] || 0)) return false;
+      }
+      return false;
+    };
+    checkUpdateBtn.addEventListener('click', async () => {
+      updateStatusMsg.style.display = 'block';
+      updateStatusMsg.textContent = '正在比對線上最新版本…';
+      try {
+        const targetUrl = (location.hostname === 'tallyc.github.io')
+          ? location.pathname + '?t=' + Date.now()
+          : 'https://tallyc.github.io/Jingxing-Chulu/index.html?t=' + Date.now();
+        const res = await fetch(targetUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const text = await res.text();
+        const m = text.match(/淨行初履（Jingxing-Chulu）[^<]*(?:<[^>]+>)*V-([0-9]+\.[0-9]+)/);
+        const remoteVer = m ? m[1] : null;
+        if (!remoteVer) {
+          updateStatusMsg.textContent = '已連線，但未能讀取版本號（目前為 V-' + CURRENT_VER + '）。';
+        } else if (isNewer(remoteVer, CURRENT_VER)) {
+          updateStatusMsg.innerHTML = '發現新版 V-' + remoteVer + '！<button type="button" class="text-link" id="reloadNewVerBtn" style="color:var(--seal); font-weight:600; margin-left:6px;">點此立即更新 →</button>';
+          document.getElementById('reloadNewVerBtn').addEventListener('click', () => {
+            const base = location.origin + location.pathname;
+            location.href = base + '?v=' + remoteVer + '&t=' + Date.now();
+          });
+        } else {
+          updateStatusMsg.textContent = '目前已是最新版（V-' + CURRENT_VER + '）。';
+        }
+      } catch (e) {
+        updateStatusMsg.textContent = '目前為本機或離線環境，請於線上網址重新整理以確認最新版（目前 V-' + CURRENT_VER + '）。';
+      }
+    });
+  }
 })();
 </script>
 </body>
